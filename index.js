@@ -1,12 +1,14 @@
+import Card from './Card'
 import Cell from './Cell'
 import IconBtn from './IconBtn'
+import Scroll from './Scroll'
 
 function install(Vue) {
   if (install.installed) {
     return
   }
   install.installed = true
-  const components = [Cell, IconBtn]
+  const components = [Card, Cell, IconBtn, Scroll]
   components.forEach(Component => {
     Component.install(Vue)
   })

@@ -1,24 +1,7 @@
 <style lang='stylus'>
-@require '../../../styles/disney/var/color.styl';
-@require '../../../styles/disney/mixin/index.styl';
-
-.ds-cell {
-  &:before {
-    setBottomLine();
-    left: 16px;
-    right: 16px;
-  }
-
-  position: relative;
-  display: flex;
-
-  .ds-icon-btn {
-    flex: 1;
-  }
-}
 </style>
 <template>
-  <div class="ds-cell">
+  <div ref="wrapper">
     <slot></slot>
   </div>
 </template>
@@ -28,28 +11,46 @@
 +-----------------------------------------------------------------------------------------------------------------------
 | Author: xank <xank@qq.com>  Blog：https://www.xank.cn
 +-----------------------------------------------------------------------------------------------------------------------
-| Ds-Cell
+| Ds-Scroll
 |
 */
-const NAME = 'ds-cell'
+
+import BScroll from 'better-scroll'
+
+const NAME = 'ds-scroll'
 
 export default {
   name: NAME,
-
+  
   components: {},
 
   props: {
+    options: Object
   },
 
   data() {
     return {
+      scroll: null 
     }
   },
 
   computed: {},
 
-  mounted() { },
+  mounted() {
+    this.$nextTick(() => {
+      this.initScroll()
+    })
+  },
 
-  methods: {}
+  methods: {
+
+    initScroll() {
+      if (!this.$refs.wrapper) {
+        return
+      }
+      const { options } = this
+      this.scroll = new BScroll(this.$refs.wrapper, options)
+    }
+  }
 }
 </script>
