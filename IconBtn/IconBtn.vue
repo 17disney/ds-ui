@@ -4,7 +4,14 @@
 
 .ds-icon-btn {
   text-align: center;
-  padding: 10px 0;
+  padding: 16px 0;
+  transition: 0.3s;
+
+  &:active {
+    .att-icon {
+      color: $color-primary-s;
+    }
+  }
 
   &__icon {
     display: inline-block;
@@ -14,19 +21,23 @@
     border-radius: 48px;
   }
 
+  .att-icon {
+    transition: 0.3s;
+    color: $color-primary;
+    font-size: 24px;
+  }
+
   &__name {
-    color: $color-dark-grey;
+    // color: $color-dark-grey;
     line-height: 24px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
   }
 }
 </style>
 <template>
   <div class="ds-icon-btn">
-    <div class="ds-icon-btn__icon">
-
-    </div>
+    <att-icon :name="icon"></att-icon>
     <div class="ds-icon-btn__name">
       {{name}}
     </div>
@@ -50,7 +61,8 @@ export default {
   components: {},
 
   props: {
-    name: String
+    name: String,
+    icon: String
   },
 
   data() {

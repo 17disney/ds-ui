@@ -1,7 +1,9 @@
+import Card from './Card'
 import CardAtt from './CardAtt'
 
-CardAtt.install = (Vue) => {
+Card.install = (Vue) => {
+  Vue.component(Card.name, Card)
   Vue.component(CardAtt.name, CardAtt)
 }
 
-export default CardAtt
+export default Card

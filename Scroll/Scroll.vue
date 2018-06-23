@@ -1,8 +1,20 @@
 <style lang='stylus'>
+.ds-scroll {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  &-wrapper {
+    width: 10000px;
+    overflow: hidden;
+  }
+}
 </style>
 <template>
-  <div ref="wrapper">
-    <slot></slot>
+  <div class="ds-scroll" ref="wrapper">
+    <div class="ds-scroll-wrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -21,7 +33,7 @@ const NAME = 'ds-scroll'
 
 export default {
   name: NAME,
-  
+
   components: {},
 
   props: {
@@ -30,7 +42,7 @@ export default {
 
   data() {
     return {
-      scroll: null 
+      scroll: null
     }
   },
 
@@ -49,6 +61,7 @@ export default {
         return
       }
       const { options } = this
+      console.log(options)
       this.scroll = new BScroll(this.$refs.wrapper, options)
     }
   }
