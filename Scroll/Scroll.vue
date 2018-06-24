@@ -5,8 +5,7 @@
   width: 100%;
 
   &-wrapper {
-    width: 10000px;
-    overflow: hidden;
+    // overflow: hidden;
   }
 }
 </style>
@@ -37,7 +36,13 @@ export default {
   components: {},
 
   props: {
-    options: Object
+    options: {
+      type: Object,
+      width: Number,
+      default: () => {
+        return {}
+      }
+    }
   },
 
   data() {
@@ -61,7 +66,6 @@ export default {
         return
       }
       const { options } = this
-      console.log(options)
       this.scroll = new BScroll(this.$refs.wrapper, options)
     }
   }
