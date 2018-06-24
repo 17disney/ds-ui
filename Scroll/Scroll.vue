@@ -5,14 +5,18 @@
   width: 100%;
 
   &-wrapper {
-    // overflow: hidden;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
   }
 }
 </style>
 <template>
   <div class="ds-scroll" ref="wrapper">
     <div class="ds-scroll-wrapper">
-      <slot></slot>
+      <div>
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +33,8 @@
 import BScroll from 'better-scroll'
 
 const NAME = 'ds-scroll'
+const DIRECTION_H = 'horizontal'
+const DIRECTION_V = 'vertical'
 
 export default {
   name: NAME,
@@ -36,12 +42,13 @@ export default {
   components: {},
 
   props: {
-    options: {
-      type: Object,
-      width: Number,
-      default: () => {
-        return {}
-      }
+    direction: {
+      type: String,
+      default: DIRECTION_V
+    },
+    click: {
+      type: Boolean,
+      default: true
     }
   },
 
@@ -65,7 +72,13 @@ export default {
       if (!this.$refs.wrapper) {
         return
       }
-      const { options } = this
+
+      let options = {
+        click: this.click,
+        scrollY: this.freeScroll || this.direction === DIRECTION_V,
+        scrollX: this.freeScroll || this.direction === DIRECTION_H
+      }
+
       this.scroll = new BScroll(this.$refs.wrapper, options)
     }
   }

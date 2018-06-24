@@ -46,12 +46,14 @@
     font-size: 30px;
     color: $color-primary;
   }
-  &-list{
+
+  &-list {
   }
 
   &-item {
     display: inline-block;
-    margin-right: 16px;
+    // margin-right: 16px;
+    padding: 0 8px;
     text-align: center;
 
     &.is-active {
@@ -62,11 +64,11 @@
     }
 
     &:first-child {
-      margin-left: 16px;
+      margin-left: 8px;
     }
 
     &:last-child {
-      margin-right: 16px;
+      margin-right: 8px;
     }
   }
 }
@@ -77,9 +79,9 @@
       <span class="select-date__year">{{year}}</span>
       <span class="select-date__month">{{month}}</span>
     </div>
-    <ds-scroll :bindscroll="handleBindscroll" class="select-date-scroll" :options="options">
+    <ds-scroll class="select-date-scroll" direction="horizontal">
       <ul class="date-list" ref="tabList">
-        <li class="date-item" :class="{'is-active': item.value === select}" @click="handleClick(item.value)" v-for="(item, index) in dates" :key="index">
+        <li class="date-item" :class="{'is-active': item.value === value}" @click="handleClick(item.value)" v-for="(item, index) in dates" :key="index">
           <div class="date__week">星期{{item.week}}</div>
           <div class="date__day">{{item.day}}</div>
         </li>
@@ -112,12 +114,15 @@ export default {
   components: {},
 
   props: {
-    select: String,
+    value: {
+      required: true
+    },
     dateRange: Array
   },
 
   data() {
     return {
+      selected: null,
       options: {
         scrollX: true,
         scrollY: false
@@ -128,15 +133,15 @@ export default {
 
   computed: {
     year() {
-      if (this.select) {
-        return moment(this.select, 'YYYY-MM-DD').format('YYYY年')
+      if (this.value) {
+        return moment(this.value, 'YYYY-MM-DD').format('YYYY年')
       } else {
         return '----年'
       }
     },
     month() {
-      if (this.select) {
-        return moment(this.select, 'YYYY-MM-DD').format('M月')
+      if (this.value) {
+        return moment(this.value, 'YYYY-MM-DD').format('M月')
       } else {
         return '--月'
       }
@@ -148,11 +153,17 @@ export default {
   },
   watch: {
     dateRange(val) {
-      console.log(val)
       this.init()
+    },
+    value(val) {
+      this.selected = val
+    },
+    selected(val) {
+      this.$emit('input', val)
     }
   },
   methods: {
+    // 初始化日期
     init() {
       const [start, end] = this.dateRange
       const result = []
@@ -173,8 +184,10 @@ export default {
         })
       }
     },
+    // 选择日期
     handleClick(val) {
-      this.$emit('click', val)
+      this.selected = val
+      this.$emit('change', val)
     },
     handleBindscroll(e) {
       console.log(e)
@@ -184,9 +197,9 @@ export default {
       const items = tabList.children
       let width = 0
       for (let i = 0; i < items.length; i++) {
-        width += items[i].offsetWidth + 32
+        width += items[i].offsetWidth
       }
-      tabList.style.width = (width + 1) + 'px'
+      tabList.style.width = (width + 16) + 'px'
     },
   }
 }
