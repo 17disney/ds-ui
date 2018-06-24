@@ -5,21 +5,31 @@
 .ds-card-att {
   float: left;
   display: inline-block;
-  height: 100px;
-  width: 200px;
+  width: 180px;
   border-radius: 8px;
   border: 1px solid $color-primary-s;
-  display: flex;
+  text-align: center;
+  padding: 10px 10px;
 
   .att-media {
-    width: 48px;
-    height: 48px;
+    display: inline-block;
+  }
+
+  .att-name {
+    font-size: 15px;
+    line-height: 28px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 </style>
 <template>
-  <div class="ds-card-att">
+  <div class="ds-card-att" @click="handleClick(item)">
     <att-media :medias="data.medias"></att-media>
+    <div class="att-name">
+      {{data.name}}
+    </div>
   </div>
 </template>
 
@@ -52,8 +62,14 @@ export default {
 
   computed: {},
 
-  mounted() { },
+  mounted() {
 
-  methods: {}
+  },
+
+  methods: {
+    handleClick(item) {
+      this.$emit('click', item)
+    }
+  }
 }
 </script>
