@@ -1,5 +1,7 @@
+import Button from './Button'
 import Card from './Card'
 import Cell from './Cell'
+import Header from './Header'
 import IconBtn from './IconBtn'
 import List from './List'
 import Loading from './Loading'
@@ -12,7 +14,18 @@ function install(Vue) {
     return
   }
   install.installed = true
-  const components = [Card, Cell, IconBtn, List, Loading, Page, Scroll, Select]
+  const components = [
+    Button,
+    Card,
+    Cell,
+    Header,
+    IconBtn,
+    List,
+    Loading,
+    Page,
+    Scroll,
+    Select
+  ]
   components.forEach(Component => {
     Component.install(Vue)
   })
