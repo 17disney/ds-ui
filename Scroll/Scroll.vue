@@ -12,7 +12,7 @@
 }
 </style>
 <template>
-  <div class="ds-scroll" ref="wrapper">
+  <div class="ds-scroll" :ref="ref">
     <div class="ds-scroll-wrapper">
       <div>
         <slot></slot>
@@ -49,18 +49,24 @@ export default {
     click: {
       type: Boolean,
       default: true
-    }
+    },
+    startY: {
+      type: Number,
+      default: 0
+    },
   },
 
   data() {
     return {
-      scroll: null
+      scroll: null,
+      ref: null
     }
   },
 
   computed: {},
 
   mounted() {
+    this.ref = 'id' + parseInt(Math.random() * 1000000)
     this.$nextTick(() => {
       this.initScroll()
     })
@@ -69,17 +75,19 @@ export default {
   methods: {
 
     initScroll() {
-      if (!this.$refs.wrapper) {
+      if (!this.$refs[this.ref]) {
         return
       }
 
       let options = {
         click: this.click,
         scrollY: this.freeScroll || this.direction === DIRECTION_V,
-        scrollX: this.freeScroll || this.direction === DIRECTION_H
+        scrollX: this.freeScroll || this.direction === DIRECTION_H,
+        startY: this.startY,
+        mouseWheel: false
       }
 
-      this.scroll = new BScroll(this.$refs.wrapper, options)
+      this.scroll = new BScroll(this.$refs[this.ref], options)
     }
   }
 }
