@@ -2,17 +2,11 @@
 .wrapper {
   overflow: auto;
   width: 100%;
-  height: calc(100% - 0px);
-}
-
-.wrapper {
-  position: relative;
-  height: 100%;
-  /* position: absolute */
-  /* left: 0 */
-  /* top: 0 */
-  /* right: 0 */
-  /* bottom: 0 */
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
   overflow: hidden;
   background: #fff;
 
@@ -255,7 +249,7 @@ export default {
 
       this.scroll.on('scroll', (pos) => {
         if (this.beforePullDown) {
-          const bubbleY = Math.max(0, pos.y +  this.pullDownInitTop)
+          const bubbleY = Math.max(0, pos.y + this.pullDownInitTop)
           this.bubbleY = bubbleY
           this.pullDownStyle = `top:${Math.min(pos.y + this.pullDownInitTop, 10)}px`
         } else {
