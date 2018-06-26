@@ -5,9 +5,12 @@ import Header from './Header'
 import IconBtn from './IconBtn'
 import List from './List'
 import Loading from './Loading'
+import Map from './Map'
 import Page from './Page'
 import Scroll from './Scroll'
 import Select from './Select'
+import Tabbar from './Tabbar'
+import TabItem from './TabItem'
 
 function install(Vue) {
   if (install.installed) {
@@ -22,9 +25,12 @@ function install(Vue) {
     IconBtn,
     List,
     Loading,
+    Map,
     Page,
     Scroll,
-    Select
+    Select,
+    Tabbar,
+    TabItem
   ]
   components.forEach(Component => {
     Component.install(Vue)
