@@ -10,10 +10,10 @@
 
 <template>
   <div class="ds-map">
-    <v-map v-if="local === 'shanghai'" :crs="crsBaidu" ref="map" :zoom="18" :min-zoom=12 :max-zoom=18 :center="center">
+    <v-map v-if="local === 'shanghai'" :crs="crsBaidu" ref="map" :zoom="18" :min-zoom=12 :max-zoom=20 :center="center">
       <slot></slot>
     </v-map>
-    <v-map v-else ref="map" :zoom="18" :min-zoom=12 :max-zoom=18 :center="center">
+    <v-map v-else ref="map" :zoom="18" :min-zoom=12 :max-zoom=20 :center="center">
       <slot></slot>
     </v-map>
   </div>
@@ -32,7 +32,7 @@ import webdogTileLayer from './lib/webdogTileLayer'
 
 const NAME = 'ds-map'
 const TILE_LAYER = {
-  shanghai: 'https://secure.parksandresorts.wdpromedia.com/media/maps/prod/shdr-baidu/13/{z}/{x}/{y}.jpg',
+  shanghai: 'https://secure.parksandresorts.wdpromedia.com/media/maps/prod/shdr-baidu/16/{z}/{x}/{y}.jpg',
   orlando: 'https://secure.parksandresorts.wdpromedia.com/media/maps/prod/93/{z}/{x}/{y}.jpg',
   california: 'https://secure.parksandresorts.wdpromedia.com/media/maps/prod/disneyland/38/{z}/{x}/{y}.jpg',
   hongkong: 'https://secure.parksandresorts.wdpromedia.com/media/maps/prod/hkdl/18/{z}/{x}/{y}.jpg',
@@ -71,7 +71,9 @@ export default {
   mounted() {
     const { local } = this
 
-    let options = {}
+    let options = {
+      maxZoom: 20
+    }
     if (local === 'shanghai') {
       options = {
         getUrlArgs: (tilePoint) => {
