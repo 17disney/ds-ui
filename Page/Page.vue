@@ -4,11 +4,15 @@
   width: 100%;
   position: absolute;
   left: 0;
-  top: 56px;
+  top: 0;
   right: 0;
   bottom: 0;
   overflow: hidden;
   background: #fff;
+
+  &.is-header {
+    top: 56px;
+  }
 
   .scroll-content {
     position: relative;
@@ -53,7 +57,7 @@
 }
 </style>
 <template>
-  <div class="page wrapper" ref="wrapper">
+  <div class="page wrapper" :class="'is-' + header" ref="pageWrapper">
     <div class="scroll-content">
       <div ref="listWrapper">
         <slot>
@@ -70,7 +74,6 @@
         </div>
       </slot>
     </div>
-
     <slot name="pulldown" :pullDownRefresh="pullDownRefresh" :pullDownStyle="pullDownStyle" :beforePullDown="beforePullDown" :isPullingDown="isPullingDown" :bubbleY="bubbleY">
       <div ref="pulldown" class="pulldown-wrapper" :style="pullDownStyle" v-if="pullDownRefresh">
         <div class="before-trigger" v-if="beforePullDown">
@@ -109,6 +112,10 @@ export default {
   components: { Bubble },
 
   props: {
+    header: {
+      type: String,
+      default: 'default'
+    },
     probeType: {
       type: Number,
       default: 1
@@ -166,7 +173,7 @@ export default {
 
   methods: {
     initScroll() {
-      if (!this.$refs.wrapper) {
+      if (!this.$refs.pageWrapper) {
         return
       }
 
@@ -180,7 +187,7 @@ export default {
         mouseWheel: false
       }
 
-      this.scroll = new BScroll(this.$refs.wrapper, options)
+      this.scroll = new BScroll(this.$refs.pageWrapper, options)
 
       if (this.listenScroll) {
         this.scroll.on('scroll', (pos) => {
