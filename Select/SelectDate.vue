@@ -200,7 +200,7 @@ export default {
         width += items[i].offsetWidth
       }
       tabList.style.width = (width + 16) + 'px'
-    },
+    }
   }
 }
 </script>
