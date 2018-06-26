@@ -71,17 +71,15 @@ export default {
   mounted() {
     const { local } = this
 
-    let options = {
+    const options = {
       maxZoom: 20
     }
     if (local === 'shanghai') {
-      options = {
-        getUrlArgs: (tilePoint) => {
-          return {
-            z: tilePoint.z,
-            x: tilePoint.x + Math.pow(2, tilePoint.z - 1),
-            y: tilePoint.y + Math.pow(2, tilePoint.z - 1)
-          }
+      options.getUrlArgs = (tilePoint) => {
+        return {
+          z: tilePoint.z,
+          x: tilePoint.x + Math.pow(2, tilePoint.z - 1),
+          y: tilePoint.y + Math.pow(2, tilePoint.z - 1)
         }
       }
     }
