@@ -14,7 +14,7 @@
 
 <template>
   <div class="ds-map">
-    <v-map v-if="local === 'shanghai'" :crs="crsBaidu" ref="map" :zoom="18" :min-zoom=14 :max-zoom=20 :center="center" :options="options">
+    <v-map v-if="local === 'shanghai'" :crs="crsBaidu" ref="map" :zoom="18" :min-zoom=12 :max-zoom=20 :center="center" :options="options">
       <slot></slot>
     </v-map>
     <v-map v-else ref="map" :zoom="18" :min-zoom=14 :max-zoom=20 :center="center" :options="options">
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       options: {
-        zoomSnap: 0.1, // 设置无极缩放
+        zoomSnap: 0.05, // 设置无极缩放
         touchZoom: 'center', // 双指缩放地图的同时锁定地图移动
         bounceAtZoomLimits: false // 关闭回弹
       },
