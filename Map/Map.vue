@@ -33,6 +33,7 @@
 | Ds-Map
 | 迪士尼地图组件
 */
+
 import crsBaidu from './lib/crs.baidu'
 import webdogTileLayer from './lib/webdogTileLayer'
 import MarkerCluster from './MarkerCluster'
@@ -51,9 +52,6 @@ export default {
 
   components: {
     MarkerCluster
-  },
-
-  computed: {
   },
 
   props: {
@@ -104,10 +102,12 @@ export default {
 
   mounted() {
     const { local } = this
-
+    const url = TILE_LAYER[local]
+    const map = this.$refs.map.mapObject
     const options = {
       maxZoom: 20
     }
+
     if (local === 'shanghai') {
       options.getUrlArgs = (tilePoint) => {
         return {
@@ -118,15 +118,10 @@ export default {
       }
     }
 
-    const url = TILE_LAYER[local]
-    const map = this.$refs.map.mapObject
     webdogTileLayer(url, options).addTo(map)
   },
 
-  methods: {
-    handleClickAtt() {
-    }
-  }
+  methods: {}
 }
 </script>
 
