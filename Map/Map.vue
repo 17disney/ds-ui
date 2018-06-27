@@ -15,7 +15,9 @@
 <template>
   <div class="ds-map">
     <v-map v-if="local === 'shanghai'" :crs="crsBaidu" ref="map" :zoom="18" :min-zoom=12 :max-zoom=20 :center="center" :options="options">
-      <slot></slot>
+      <marker-cluster :options="clusterOptions">
+        <slot></slot>
+      </marker-cluster>
     </v-map>
     <v-map v-else ref="map" :zoom="18" :min-zoom=14 :max-zoom=20 :center="center" :options="options">
       <slot></slot>
@@ -33,6 +35,7 @@
 */
 import crsBaidu from './lib/crs.baidu'
 import webdogTileLayer from './lib/webdogTileLayer'
+import MarkerCluster from './MarkerCluster'
 
 const NAME = 'ds-map'
 const TILE_LAYER = {
@@ -47,6 +50,7 @@ export default {
   name: NAME,
 
   components: {
+    MarkerCluster
   },
 
   computed: {
@@ -73,6 +77,27 @@ export default {
       },
       tilelayerOptions: {
         tms: true
+      },
+      clusterOptions: {
+        animate: false,
+        maxClusterRadius: 45, // 合并半径
+        showCoverageOnHover: false,
+        // disableClusteringAtZoom: 20
+        iconCreateFunction: function (cluster) {
+          return L.divIcon({
+            className: 'att-marker att-marker--more',
+            html: `
+              <div class="att-marker__child-1"></div>
+              <div class="att-marker__child-2"></div>
+              <div class="att-marker__content">
+                <div class="att-marker__num">${cluster.getChildCount()}</div>
+              </div>
+              <div class="att-marker__tip__container">
+                <div class="att-marker__tip">
+              </div>
+            `
+          })
+        }
       }
     }
   },

@@ -17,6 +17,11 @@
     position: relative;
     text-align: center;
 
+    .att-icon {
+      font-size: 18px;
+      height: 18px;
+    }
+
     &::after {
       background-color: #000;
       content: ' ';
@@ -31,6 +36,7 @@
     &-icon {
       vertical-align: middle;
       display: inline-block;
+      height: 20px;
     }
 
     &--default {

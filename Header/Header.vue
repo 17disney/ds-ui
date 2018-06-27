@@ -54,13 +54,19 @@ $z-index-normal = 1000;
 </style>
 <template>
   <header class="ds-header" :class="{ 'is-fixed': fixed }">
+    <!-- 左按钮 -->
     <div class="ds-header-button is-left">
       <slot name="left"></slot>
     </div>
+    <!-- 标题 -->
     <h1 class="ds-header-title" v-text="title"></h1>
+    <!-- 右按钮 -->
     <div class="ds-header-button is-right">
       <slot name="right"></slot>
     </div>
+    <slot></slot>
+
+    
     <div class="line"></div>
   </header>
 </template>
