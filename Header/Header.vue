@@ -14,7 +14,7 @@ $z-index-normal = 1000;
   font-size: 14px;
   height: $header-height;
   line-height: 1;
-  padding: 0 10px;
+  // padding: 0 10px;
   position: relative;
   text-align: center;
   white-space: nowrap;
@@ -24,7 +24,9 @@ $z-index-normal = 1000;
   }
 
   &-button {
-    flex: 0.5;
+    // flex: 0.5;
+    background: #FFF;
+    z-index: 1;
 
     > a {
       color: inherit;
@@ -46,14 +48,68 @@ $z-index-normal = 1000;
     font-weight: 600;
   }
 
-  .is-fixed {
-    position: fixed 0 0 * 0;
-    z-index: $z-index-normal;
+  &.is-fixed {
+    top: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    z-index: 100;
+  }
+
+  &.is-wheel {
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+
+    .ds-tab__item {
+      padding: 20px 12px;
+      // padding-bottom 30px;
+      color: $color-primary-dark;
+      font-size: 20px;
+
+      &.is-selected {
+        font-weight: 600;
+        color: $color-primary-dark;
+      }
+    }
+  }
+
+  .scroll-mark-bg {
+    width: 60px;
+    height: 30px;
+    position: absolute;
+    left: 50%;
+    bottom: -30px;
+    margin-left: -30px;
+    overflow: hidden;
+
+    .mark {
+      background: #FFF;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+      width: 40px;
+      height: 40px;
+      margin: -20px auto 0px auto;
+      border-radius: 100%;
+    }
+  }
+
+  .scroll-mark-icon {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    bottom: -20px;
+    width: 40px;
+    height: 40px;
+    margin-left: -20px;
+    font-size: 24px;
+    line-height: 40px;
+    color: $color-primary-dark;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 </style>
 <template>
-  <header class="ds-header" :class="{ 'is-fixed': fixed }">
+  <header class="ds-header" :class="{ 'is-fixed': fixed, 'is-wheel': wheel }">
     <!-- 左按钮 -->
     <div class="ds-header-button is-left">
       <slot name="left"></slot>
@@ -64,10 +120,20 @@ $z-index-normal = 1000;
     <div class="ds-header-button is-right">
       <slot name="right"></slot>
     </div>
+
+    <!-- 内容 -->
     <slot></slot>
 
-    
-    <div class="line"></div>
+    <!-- 滚动模式 -->
+    <div class="scroll-mark-icon" v-if="wheel">
+      <slot name="focus-icon"></slot>
+    </div>
+
+    <div v-if="wheel" class="scroll-mark-bg">
+      <div class="mark"></div>
+    </div>
+
+    <div class="line" v-if="line"></div>
   </header>
 </template>
 
@@ -102,7 +168,15 @@ export default {
 
   props: {
     fixed: Boolean,
-    title: String
+    title: String,
+    line: {
+      type: Boolean,
+      default: false
+    },
+    wheel: {
+      type: Boolean,
+      default: false
+    }
   },
 
   data() {

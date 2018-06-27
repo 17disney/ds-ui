@@ -20,7 +20,9 @@
       </marker-cluster>
     </v-map>
     <v-map v-else ref="map" :zoom="18" :min-zoom=14 :max-zoom=20 :center="center" :options="options">
-      <slot></slot>
+      <marker-cluster :options="clusterOptions">
+        <slot></slot>
+      </marker-cluster>
     </v-map>
   </div>
 </template>
