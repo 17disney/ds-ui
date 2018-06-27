@@ -24,7 +24,7 @@ $z-index-normal = 1000;
   }
 
   &-button {
-    // flex: 0.5;
+    width: 48px;
     background: #FFF;
     z-index: 1;
 
@@ -171,7 +171,7 @@ export default {
     title: String,
     line: {
       type: Boolean,
-      default: false
+      default: true
     },
     wheel: {
       type: Boolean,

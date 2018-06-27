@@ -247,7 +247,6 @@ export default {
       }
     },
     _initPullDownRefresh() {
-      console.log('ok')
       this.scroll.on('pullingDown', () => {
         this.beforePullDown = false
         this.isPullingDown = true

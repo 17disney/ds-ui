@@ -9,6 +9,7 @@ import Map from './Map'
 import Page from './Page'
 import Scroll from './Scroll'
 import Select from './Select'
+import Tab from './Tab'
 import Tabbar from './Tabbar'
 import TabItem from './TabItem'
 
@@ -28,6 +29,7 @@ function install(Vue) {
     Map,
     Page,
     Scroll,
+    Tab,
     Select,
     Tabbar,
     TabItem
