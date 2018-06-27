@@ -1,9 +1,9 @@
 <template>
-  <a class="ds-tab-item" @click="$parent.$emit('input', id)" :class="{ 'is-selected': $parent.value === id }">
-    <div class="ds-tab-item-icon">
+  <a class="ds-tab-item" @click="$parent.$emit('input', id)" :class="[{ 'is-selected': $parent.value === id }, 'is-' + type]">
+    <div class="ds-tab-item__icon">
       <slot name="icon"></slot>
     </div>
-    <div class="ds-tab-item-label">
+    <div class="ds-tab-item__label">
       <slot></slot>
     </div>
   </a>
@@ -25,7 +25,10 @@
  */
 export default {
   name: 'ds-tab-item',
-  props: ['id']
+  props: {
+    id: String,
+    type: String
+  },
 };
 </script>
 
@@ -60,6 +63,18 @@ $tab-item-font-size = 12px;
       color: inherit;
       font-size: $tab-item-font-size;
       line-height: 1;
+    }
+
+    &.is-wheel {
+      .ds-tab-item__label {
+        font-size: 20px;
+        line-height: 18px;
+        padding: 7px 10px;
+      }
+
+      &.is-selected {
+        font-weight: 700;
+      }
     }
   }
 }

@@ -257,8 +257,8 @@ export default {
   mounted() { },
 
   methods: {
-    handleClick() {
-
+    handleClick(id) {
+      this.$emit('click', id)
     }
   }
 }
