@@ -1,15 +1,18 @@
 <style lang='stylus'>
+@require '../../../styles/disney/var/color.styl';
+@require '../../../styles/disney/mixin/index.styl';
+
 .ds-list-item {
   display: flex;
   padding: 16px;
   align-items: center;
 
-  &__media {
-    margin-right: 16px;
-  }
-
   &.size-mini {
     padding: 8px 16px;
+  }
+
+  &__media {
+    margin-right: 16px;
   }
 
   &__content {
@@ -33,6 +36,10 @@
     font-weight: 500;
     line-height: 1.25;
   }
+
+  .line{
+    setBottomLine()
+  }
 }
 </style>
 <template>
@@ -46,6 +53,7 @@
     <div class="ds-list-item__tail">
       <slot name="tail"></slot>
     </div>
+    <div class="line" v-if="line"></div>
   </div>
 </template>
 
@@ -58,7 +66,11 @@ export default {
   components: {},
 
   props: {
-    size: String
+    size: String,
+    line: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data() {
