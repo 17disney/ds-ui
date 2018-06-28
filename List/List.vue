@@ -3,6 +3,15 @@
 @require '../../../styles/disney/mixin/index.styl';
 
 .ds-list {
+  width: 100%;
+  padding: 0 16px;
+
+  .ds-list-item{
+    &:after{
+      // setBottomLine();
+    }
+  }
+
   >div {
     position: relative;
 

@@ -3,14 +3,15 @@
 @require '../../../styles/disney/mixin/index.styl';
 
 .ds-cell {
+  position: relative;
+  display: flex;
+  padding: 8px 0;
+
   &:before {
     setBottomLine();
     left: 16px;
     right: 16px;
   }
-
-  position: relative;
-  display: flex;
 
   .ds-icon-btn {
     flex: 1;

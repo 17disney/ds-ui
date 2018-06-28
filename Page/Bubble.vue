@@ -132,7 +132,6 @@
     },
     watch: {
       y(val) {
-        console.log(val)
         this._draw()
       }
     }
