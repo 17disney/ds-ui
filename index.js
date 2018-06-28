@@ -5,7 +5,6 @@ import Header from './Header'
 import IconBtn from './IconBtn'
 import List from './List'
 import Loading from './Loading'
-import Map from './Map'
 import Mark from './Mark'
 import Page from './Page'
 import Scroll from './Scroll'
@@ -27,7 +26,6 @@ function install(Vue) {
     IconBtn,
     List,
     Loading,
-    Map,
     Mark,
     Page,
     Scroll,

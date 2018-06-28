@@ -12,7 +12,6 @@
 - [x] Icon-Btn
 - [ ] List
 - [ ] Loading
-- [x] Map
 - [x] Page  
 - [x] Scroll
 - [x] Select-Date
