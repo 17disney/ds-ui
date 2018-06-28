@@ -7,6 +7,14 @@
   display: flex;
   padding: 8px 0;
 
+  &.is-btn-group {
+    flex-wrap: wrap;
+
+    .btn-item {
+      width: 25%;
+    }
+  }
+
   &:before {
     setBottomLine();
     left: 16px;
@@ -19,7 +27,7 @@
 }
 </style>
 <template>
-  <div class="ds-cell">
+  <div class="ds-cell" :class="'is-' + mode">
     <slot></slot>
   </div>
 </template>
@@ -40,6 +48,7 @@ export default {
   components: {},
 
   props: {
+    mode: String
   },
 
   data() {

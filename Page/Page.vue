@@ -57,7 +57,7 @@
 }
 </style>
 <template>
-  <div class="page wrapper" :class="'is-' + header" ref="pageWrapper">
+  <div class="page wrapper" :class="{'is-header': header}" ref="pageWrapper">
     <div class="scroll-content">
       <div ref="listWrapper">
         <slot>
@@ -113,8 +113,8 @@ export default {
 
   props: {
     header: {
-      type: String,
-      default: 'default'
+      type: Boolean,
+      default: false
     },
     probeType: {
       type: Number,

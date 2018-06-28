@@ -1,7 +1,40 @@
+<style lang='stylus'>
+@require '../../../styles/disney/var/color.styl';
+@require '../../../styles/disney/mixin/index.styl';
+
+$z-index-normal = 100;
+
+.ds-tabbar {
+  position: relative;
+  background-color: #FFF;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+
+  .line {
+    setTopLine();
+  }
+
+  &.is-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-index-normal;
+  }
+
+  .ds-tab-item.is-selected {
+    color: $color-primary;
+  }
+}
+</style>
+
 <template>
-  <div class="ds-tabbar" :class="{
-      'is-fixed': fixed
-    }">
+  <div class="ds-tabbar" :class="{'is-fixed': fixed}">
+    <div class="line"></div>
     <slot></slot>
   </div>
 </template>
@@ -39,35 +72,3 @@ export default {
   }
 };
 </script>
-
-<style lang='stylus'>
-@require '../../../styles/disney/var/color.styl';
-@require '../../../styles/disney/mixin';
-
-$z-index-normal = 100;
-
-.ds {
-  &-tabbar {
-    position: relative;
-    background-color: #FFF;
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-
-    .is-fixed {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: $z-index-normal;
-    }
-
-    > .mint-tab-item.is-selected {
-      color: $color-primary;
-    }
-  }
-}
-</style>

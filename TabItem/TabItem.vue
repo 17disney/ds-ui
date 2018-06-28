@@ -1,3 +1,60 @@
+<style lang='stylus'>
+@require '../../../styles/disney/var/color.styl';
+@require '../../../styles/disney/mixin';
+
+$tab-item-font-size = 12px;
+
+.ds-tab-item {
+  display: block;
+  padding: 7px 0;
+  flex: 1;
+  text-decoration: none;
+
+  &.is-icon {
+    size: 24px;
+    margin: 0 auto 5px;
+
+    &:empty {
+      display: none;
+    }
+
+    & > * {
+      display: block;
+      size: 100%;
+    }
+  }
+
+  &.is-label {
+    color: inherit;
+    font-size: $tab-item-font-size;
+    line-height: 1;
+  }
+
+  &.is-wheel {
+    .ds-tab-item__label {
+      font-size: 20px;
+      line-height: 18px;
+      padding: 7px 10px;
+    }
+
+    &.is-selected {
+      font-weight: 700;
+    }
+  }
+
+  &__label {
+    font-size: 12px;
+  }
+
+  &__icon {
+    img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+</style>
+
 <template>
   <a class="ds-tab-item" @click="$parent.$emit('input', id)" :class="[{ 'is-selected': $parent.value === id }, 'is-' + type]">
     <div class="ds-tab-item__icon">
@@ -26,56 +83,8 @@
 export default {
   name: 'ds-tab-item',
   props: {
-    id: String,
+    id: [String, Number],
     type: String
   },
 };
 </script>
-
-<style lang='stylus'>
-@require '../../../styles/disney/var/color.styl';
-@require '../../../styles/disney/mixin';
-
-$tab-item-font-size = 12px;
-
-.ds {
-  &-tab-item {
-    display: block;
-    padding: 7px 0;
-    flex: 1;
-    text-decoration: none;
-
-    .is-icon {
-      size: 24px;
-      margin: 0 auto 5px;
-
-      &:empty {
-        display: none;
-      }
-
-      & > * {
-        display: block;
-        size: 100%;
-      }
-    }
-
-    .is-label {
-      color: inherit;
-      font-size: $tab-item-font-size;
-      line-height: 1;
-    }
-
-    &.is-wheel {
-      .ds-tab-item__label {
-        font-size: 20px;
-        line-height: 18px;
-        padding: 7px 10px;
-      }
-
-      &.is-selected {
-        font-weight: 700;
-      }
-    }
-  }
-}
-</style>
